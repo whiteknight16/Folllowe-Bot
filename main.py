@@ -32,15 +32,15 @@ while loop_condition:
         loop_condition=False
     except TimeoutException:
         pass
+time.sleep(8)
 
+driver.get("https://www.instagram.com/python.coder_/")
+time.sleep(10)
 
-
-driver.get("https://www.instagram.com/python.hub/")
-time.sleep(3)
-
-followers_button=driver.find_element(By.XPATH,'//*[@id="mount_0_0_Ik"]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/section/main/div/header/section/ul/li[2]/a')
-followers_button.click()
-
-while True:
-    driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', followers_button)
-    time.sleep(1)
+followers = driver.find_element(By.PARTIAL_LINK_TEXT, ' followers')
+followers.click()
+time.sleep(10)
+buttons = driver.find_elements_by_xpath("//button[contains(.,'Follow')]")
+for btn in buttons:
+    driver.execute_script("arguments[0].click();", btn)
+    time.sleep(2)
